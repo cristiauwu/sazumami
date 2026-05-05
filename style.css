@@ -19,10 +19,9 @@ html, body {
     background-color: var(--bg-color);
     color: var(--text-color);
     font-family: var(--font-secondary);
-    /* Set a large height to allow scrolling for the 240 frames */
-    height: 500vh;
+    /* Set a large height using dynamic viewport height to prevent jumps on mobile */
+    height: 500dvh;
     overflow-x: hidden;
-    scroll-behavior: smooth;
     cursor: none; /* Ocultar cursor nativo */
 }
 

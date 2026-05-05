@@ -222,7 +222,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Configurar Canvas
         resizeCanvas();
-        window.addEventListener("resize", resizeCanvas);
+        
+        let lastWidth = window.innerWidth;
+        window.addEventListener("resize", () => {
+            // Solo redimensionar si el ancho de la pantalla cambia (evita el bug de la barra de direcciones móvil)
+            if (window.innerWidth !== lastWidth) {
+                lastWidth = window.innerWidth;
+                resizeCanvas();
+            }
+        });
 
         // Dibujar primer frame
         requestAnimationFrame(() => renderFrame(0));
