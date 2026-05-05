@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sazumami - Sazón de Mar</title>
+    <meta name="description" content="Sazumami: Una mezcla artesanal nacida de la necesidad de llevar el auténtico y profundo sabor del mar directamente a tu mesa. Descubre el umami mexicano.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader-content">
+            <h2 class="loader-text">Cargando experiencia...</h2>
+            <div class="progress-bar-container">
+                <div id="progress-bar"></div>
+            </div>
+            <p id="progress-text">0%</p>
+        </div>
+    </div>
+
+    <!-- Canvas Background -->
+    <canvas id="hero-canvas"></canvas>
+
+    <!-- Scroll Indicator -->
+    <div id="scroll-indicator">
+        <div class="mouse-icon"></div>
+        <span>Desliza para explorar</span>
+    </div>
+
+    <!-- Dynamic Overlay Content -->
+    <main class="ui-container">
+        <header class="brand-logo">SAZ<span style="color: var(--accent-gold)">U</span>MAMI</header>
+
+        <section class="dynamic-content" id="content-container">
+            <h3 id="subtitle" class="subtitle">SAZÓN DE MAR</h3>
+            <h1 id="title" class="title">Sazumami</h1>
+            <div id="description" class="description">Una mezcla artesanal nacida de la necesidad de llevar el auténtico y profundo sabor del mar directamente a tu mesa. Descubre el umami mexicano.</div>
+            
+            <div id="regulatory-seal" class="regulatory-seal hidden">
+                <div class="seal-inner">
+                    <span class="exceso">EXCESO</span>
+                    <span class="sodio">SODIO</span>
+                    <span class="salud">SECRETARÍA DE SALUD</span>
+                </div>
+            </div>
+
+            <button id="cta-button" class="cta-button hidden">Hazlo tuyo</button>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

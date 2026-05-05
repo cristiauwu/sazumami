@@ -1,0 +1,448 @@
+:root {
+    --brand-name: 'Sazumami';
+    --font-primary: 'Playfair Display', serif;
+    --font-secondary: 'Plus Jakarta Sans', sans-serif;
+    
+    --bg-color: #000000;
+    --text-color: #FAF8F5;
+    --accent-gold: #D4A853;
+    --accent-red: #C1440E;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-secondary);
+    /* Set a large height to allow scrolling for the 240 frames */
+    height: 500vh;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    cursor: none; /* Ocultar cursor nativo */
+}
+
+/* Custom Cursor */
+#custom-cursor {
+    --cx: 50vw;
+    --cy: 50vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    border: 1.5px solid var(--accent-gold);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99999;
+    transform: translate(calc(var(--cx) - 50%), calc(var(--cy) - 50%));
+    transition: width 0.3s ease, height 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+}
+
+#custom-cursor.hovering {
+    width: 50px;
+    height: 50px;
+    background-color: rgba(212, 168, 83, 0.15);
+    border-color: rgba(212, 168, 83, 0.5);
+    backdrop-filter: blur(2px);
+}
+
+/* Revertir en dispositivos táctiles */
+@media (pointer: coarse), (hover: none) {
+    html, body, button, a {
+        cursor: auto !important;
+    }
+    #custom-cursor {
+        display: none !important;
+    }
+}
+
+/* Preloader */
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--bg-color);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.8s ease-out;
+}
+
+.loader-content {
+    text-align: center;
+    width: 80%;
+    max-width: 400px;
+}
+
+.loader-text {
+    font-family: var(--font-primary);
+    color: var(--accent-gold);
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+
+.progress-bar-container {
+    width: 100%;
+    height: 2px;
+    background-color: rgba(250, 248, 245, 0.1);
+    position: relative;
+    margin-bottom: 15px;
+}
+
+#progress-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0%;
+    background-color: var(--accent-gold);
+    transition: width 0.1s linear;
+}
+
+#progress-text {
+    font-family: var(--font-secondary);
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    color: var(--text-color);
+}
+
+body.loading {
+    overflow: hidden;
+}
+
+/* Canvas Background */
+#hero-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    /* Disable interactions on canvas */
+    pointer-events: none;
+}
+
+/* Scroll Indicator */
+#scroll-indicator {
+    position: fixed;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    transition: opacity 0.5s ease;
+}
+
+#scroll-indicator span {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: rgba(250, 248, 245, 0.6);
+}
+
+.mouse-icon {
+    width: 24px;
+    height: 36px;
+    border: 2px solid rgba(250, 248, 245, 0.6);
+    border-radius: 12px;
+    position: relative;
+}
+
+.mouse-icon::before {
+    content: '';
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 6px;
+    background-color: var(--accent-gold);
+    border-radius: 2px;
+    animation: scrollWheel 2s infinite;
+}
+
+@keyframes scrollWheel {
+    0% { top: 6px; opacity: 1; }
+    100% { top: 18px; opacity: 0; }
+}
+
+/* Dynamic Overlay Content */
+.ui-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 5;
+    padding-left: 10vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.5) 35%, transparent 100%);
+}
+
+.brand-logo {
+    position: absolute;
+    top: 24px;
+    left: 10vw;
+    font-family: var(--font-secondary);
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--text-color);
+}
+
+.dynamic-content {
+    max-width: 450px;
+    pointer-events: auto; /* Allow interacting with button */
+    transition: opacity 0.4s ease, margin-top 0.4s ease;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+    margin-top: 0;
+}
+
+.dynamic-content.fade-out {
+    opacity: 0;
+    margin-top: -20px;
+}
+
+.dynamic-content.fade-in {
+    opacity: 1;
+    margin-top: 0;
+}
+
+.subtitle {
+    font-family: var(--font-secondary);
+    font-size: 0.85rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--accent-gold);
+    margin-bottom: 10px;
+}
+
+.title {
+    font-family: var(--font-primary);
+    font-size: clamp(2.5rem, 4.5vw, 4rem);
+    line-height: 1.1;
+    margin-bottom: 16px;
+    font-weight: 400;
+}
+
+.description {
+    font-family: var(--font-secondary);
+    font-size: 1rem;
+    line-height: 1.6;
+    color: rgba(250, 248, 245, 0.85);
+    margin-bottom: 20px;
+}
+
+/* CTA Button */
+.cta-button {
+    background-color: var(--accent-gold);
+    color: #000000;
+    font-family: var(--font-secondary);
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 16px 36px;
+    border: none;
+    border-radius: 30px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+    text-shadow: none;
+    cursor: none; /* Mantener la coherencia del custom cursor */
+}
+
+.cta-button:hover {
+    background-color: #E2B865;
+}
+
+.cta-button.hidden {
+    display: none;
+}
+
+/* Regulatory Seal */
+.regulatory-seal {
+    width: 90px;
+    height: 90px;
+    background-color: #000;
+    clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.regulatory-seal.hidden {
+    display: none;
+}
+
+.seal-inner {
+    width: 82px;
+    height: 82px;
+    background-color: #000;
+    border: 3px solid #fff;
+    clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 5px;
+}
+
+.seal-inner .exceso, .seal-inner .sodio {
+    font-weight: 700;
+    font-size: 11px;
+    line-height: 1.1;
+    letter-spacing: 1px;
+}
+
+.seal-inner .salud {
+    font-size: 4px;
+    margin-top: 4px;
+    letter-spacing: 0.5px;
+}
+
+/* Custom UI Components */
+.highlight-text {
+    color: var(--accent-gold);
+    font-weight: 600;
+    font-size: 1.1rem;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.ingredient-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+/* Eliminar Staggered Animations */
+
+.ingredient-list li {
+    margin-bottom: 6px;
+    border-bottom: 1px solid rgba(250, 248, 245, 0.1);
+    padding-bottom: 6px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.ingredient-list span:first-child {
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.ingredient-list span:nth-child(2) {
+    color: var(--accent-gold);
+    margin: 0 10px;
+}
+
+.ingredient-list span:last-child {
+    color: rgba(250, 248, 245, 0.7);
+    flex: 1;
+    text-align: right;
+}
+
+.ingredient-note {
+    font-size: 0.8rem;
+    color: rgba(250, 248, 245, 0.6);
+    margin-top: 15px;
+    text-align: center;
+}
+
+.tag-pill-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+    justify-content: flex-start;
+}
+
+.tag-pill {
+    padding: 8px 16px;
+    border: 1px solid var(--accent-gold);
+    border-radius: 20px;
+    font-size: 0.85rem;
+    color: var(--accent-gold);
+    background-color: rgba(212, 168, 83, 0.1);
+    text-shadow: none;
+    cursor: none;
+}
+
+.nutrition-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+.nutrition-table td {
+    padding: 4px 0;
+    border-bottom: 1px solid rgba(250, 248, 245, 0.1);
+}
+
+.nutrition-table td:last-child {
+    text-align: right;
+    font-weight: 600;
+}
+
+.footer-text {
+    font-size: 0.8rem;
+    color: rgba(250, 248, 245, 0.5);
+    margin-top: 20px;
+    text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .ui-container {
+        padding: 0 5vw 10vh 5vw;
+        align-items: center;
+        justify-content: flex-end;
+        background: none;
+    }
+    
+    .brand-logo {
+        left: 50%;
+        transform: translateX(-50%);
+        top: 30px;
+    }
+
+    .dynamic-content {
+        text-align: center;
+        background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.6) 60%, transparent 100%);
+        padding: 60px 20px 20px 20px;
+        border-radius: 16px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .regulatory-seal {
+        margin: 0 auto 20px auto;
+    }
+}
