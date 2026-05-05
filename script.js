@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // === Configuración de Animación ===
     const frameCount = 240;
     const images = [];
-    const imagePath = (index) => `sequence/ezgif-frame-${index.toString().padStart(3, '0')}.png`;
+    const imagePath = (index) => `sequence/ezgif-frame-${index.toString().padStart(3, '0')}.webp`;
     
     // Datos de las Etapas (Stages)
     const stages = [
@@ -227,8 +227,8 @@ document.addEventListener("DOMContentLoaded", () => {
         // Dibujar primer frame
         requestAnimationFrame(() => renderFrame(0));
 
-        // Setup Scroll Listener
-        window.addEventListener("scroll", handleScroll);
+        // Setup Scroll Listener con { passive: true } para rendimiento móvil
+        window.addEventListener("scroll", handleScroll, { passive: true });
         
         // Ejecutar por si el usuario recarga la página a la mitad del scroll
         handleScroll();
