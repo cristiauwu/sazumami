@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const stages = [
         {
             threshold: 0,
-            title: "Saz<span style='color: var(--accent-orange)'>u</span>mami",
+            title: "Saz<span style='color: var(--accent-gold)'>u</span>mami",
             subtitle: "SAZÓN DE MAR",
             htmlContent: "",
             showSeal: false,
@@ -94,7 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
         },
         {
             threshold: 0.14,
-            title: "El <span style='color: var(--accent-orange)'>Origen</span>",
+            title: "El <span style='color: var(--accent-gold)'>Origen</span>",
             subtitle: "",
             htmlContent: "El sabor puro del océano, capturado y molido artesanalmente para elevar tus platillos a nivel gourmet.",
             showSeal: false,
@@ -102,7 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
         },
         {
             threshold: 0.28,
-            title: "Nuestra <span style='color: var(--accent-orange)'>Receta</span>",
+            title: "Nuestra <span style='color: var(--accent-gold)'>Receta</span>",
             subtitle: "",
             htmlContent: `
                 <p style="margin-bottom: 8px;">El alma de nuestro sazón es 100% natural:</p>
@@ -114,7 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
         },
         {
             threshold: 0.42,
-            title: "Ingredientes y <span style='color: var(--accent-orange)'>Composición</span>",
+            title: "Ingredientes y <span style='color: var(--accent-gold)'>Composición</span>",
             subtitle: "",
             htmlContent: `
                 <ul class="ingredient-list">
@@ -134,7 +134,7 @@ document.addEventListener("DOMContentLoaded", () => {
         },
         {
             threshold: 0.56,
-            title: "Versatilidad <span style='color: var(--accent-orange)'>Absoluta</span>",
+            title: "Versatilidad <span style='color: var(--accent-gold)'>Absoluta</span>",
             subtitle: "",
             htmlContent: `
                 <div class="tag-pill-container">
@@ -151,7 +151,7 @@ document.addEventListener("DOMContentLoaded", () => {
         },
         {
             threshold: 0.70,
-            title: "Información <span style='color: var(--accent-orange)'>Nutrimental</span>",
+            title: "Información <span style='color: var(--accent-gold)'>Nutrimental</span>",
             subtitle: "",
             htmlContent: `
                 <table class="nutrition-table">
@@ -172,7 +172,7 @@ document.addEventListener("DOMContentLoaded", () => {
         },
         {
             threshold: 0.85,
-            title: "Saz<span style='color: var(--accent-orange)'>u</span>mami",
+            title: "Saz<span style='color: var(--accent-gold)'>u</span>mami",
             subtitle: "SAZÓN DE MAR",
             htmlContent: `
                 <p style="text-align: center; margin-bottom: 20px;">Consérvese en lugar fresco y seco.</p>
@@ -285,8 +285,8 @@ document.addEventListener("DOMContentLoaded", () => {
             ctaButton.style.transform = `translate(${ctaActualX}px, ${ctaActualY}px) scale(${ctaActualScale})`;
         }
 
-        // === Lerp de Frames (Scroll Suave como Mantequilla) ===
-        currentFrame += (targetFrame - currentFrame) * 0.12;
+        // === Lerp de Frames (Scroll Suave pero Responsivo) ===
+        currentFrame += (targetFrame - currentFrame) * 0.4;
         const frameToRender = Math.round(currentFrame);
         if (frameToRender !== lastRenderedFrame) {
             lastRenderedFrame = frameToRender;
