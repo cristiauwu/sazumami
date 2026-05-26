@@ -76,6 +76,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const frameCount = 240;
     const images = [];
     const imagePath = (index) => `sequence/ezgif-frame-${index.toString().padStart(3, '0')}.webp`;
+
+    // === Scroll Lerp (Amortiguador de Frames) ===
+    let targetFrame = 0;
+    let currentFrame = 0;
+    let lastRenderedFrame = -1;
     
     // Datos de las Etapas (Stages)
     const stages = [
@@ -278,13 +283,29 @@ document.addEventListener("DOMContentLoaded", () => {
             ctaButton.style.transform = `translate(${ctaActualX}px, ${ctaActualY}px) scale(${ctaActualScale})`;
         }
 
+        // === Lerp de Frames (Scroll Suave como Mantequilla) ===
+        currentFrame += (targetFrame - currentFrame) * 0.12;
+        const frameToRender = Math.round(currentFrame);
+        if (frameToRender !== lastRenderedFrame) {
+            lastRenderedFrame = frameToRender;
+            renderFrame(frameToRender);
+        }
+
         requestAnimationFrame(animationLoop);
     }
 
-    // === Lógica del Canvas (Emular Object-Fit: Cover) ===
+    // === Lógica del Canvas (Emular Object-Fit: Cover + Retina DPR) ===
     function resizeCanvas() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        const w = window.innerWidth;
+        const h = window.innerHeight;
+
+        // Resolución interna alta (Retina) con tamaño visual normal
+        canvas.width = w * dpr;
+        canvas.height = h * dpr;
+        canvas.style.width = w + 'px';
+        canvas.style.height = h + 'px';
+        ctx.scale(dpr, dpr);
         
         // Redibujar el frame actual al cambiar el tamaño de ventana
         const currentScrollPercent = getScrollProgress();
@@ -299,17 +320,18 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!images[index] || !images[index].complete) return;
         
         const img = images[index];
-        const cw = canvas.width;
-        const ch = canvas.height;
-        const iw = img.width;
-        const ih = img.height;
+        // Usar dimensiones visuales (no las internas de Retina)
+        const cw = canvas.clientWidth;
+        const ch = canvas.clientHeight;
+        const iw = img.naturalWidth;
+        const ih = img.naturalHeight;
 
         // Matemáticas para object-fit: cover
         const scale = Math.max(cw / iw, ch / ih);
         const x = (cw / 2) - (iw / 2) * scale;
         const y = (ch / 2) - (ih / 2) * scale;
 
-        // Limpiar lienzo y dibujar
+        // Limpiar lienzo y dibujar (en coordenadas visuales, el DPR ya lo maneja ctx.scale)
         ctx.clearRect(0, 0, cw, ch);
         ctx.drawImage(img, x, y, iw * scale, ih * scale);
     }
@@ -331,13 +353,11 @@ document.addEventListener("DOMContentLoaded", () => {
             scrollIndicator.style.opacity = "1";
         }
 
-        // Calcular frame basado en scroll
-        const frameIndex = Math.min(
+        // Calcular frame objetivo (el Lerp en animationLoop se encarga de suavizar)
+        targetFrame = Math.min(
             frameCount - 1,
             Math.max(0, Math.floor(scrollPercent * (frameCount - 1)))
         );
-        
-        requestAnimationFrame(() => renderFrame(frameIndex));
 
         // Determinar etapa actual
         let newStage = 0;
