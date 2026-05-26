@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
             threshold: 0.14,
             title: "El <span style='color: var(--accent-gold)'>Origen</span>",
             subtitle: "",
-            htmlContent: "Una mezcla artesanal nacida de la necesidad de llevar el auténtico y profundo sabor del mar directamente a tu mesa.",
+            htmlContent: "El sabor puro del océano, capturado y molido artesanalmente para elevar tus platillos a nivel gourmet.",
             showSeal: false,
             showCTA: false
         },
@@ -100,9 +100,9 @@ document.addEventListener("DOMContentLoaded", () => {
             title: "Nuestra <span style='color: var(--accent-gold)'>Receta</span>",
             subtitle: "",
             htmlContent: `
-                <p>El perfil umami marino se define por nuestro ingrediente dominante:</p>
-                <span class="highlight-text">Camarón seco molido (53.42%)</span>
-                <p style="font-size: 0.85rem; opacity: 0.8;">Sal de mesa (32.05%), Ajo, Cebolla, Paprika, Pimienta, Chile y Hierbas finas secas.</p>
+                <p style="margin-bottom: 8px;">El alma de nuestro sazón es 100% natural:</p>
+                <span class="highlight-text" style="display:block; font-size:1.15rem; margin-bottom: 10px; line-height: 1.2;">Camarón Seco Premium (53%)</span>
+                <p style="font-size: 0.85rem; opacity: 0.8; line-height: 1.4;">Combinado magistralmente con Sal de mar, Ajo, Cebolla, Paprika, Pimienta, Chile y Hierbas finas.</p>
             `,
             showSeal: false,
             showCTA: false
