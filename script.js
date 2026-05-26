@@ -228,13 +228,15 @@ document.addEventListener("DOMContentLoaded", () => {
         // Configurar Canvas
         resizeCanvas();
         
-        let lastWidth = window.innerWidth;
+        let resizeTimeout;
         window.addEventListener("resize", () => {
-            // Solo redimensionar si el ancho de la pantalla cambia (evita el bug de la barra de direcciones móvil)
-            if (window.innerWidth !== lastWidth) {
-                lastWidth = window.innerWidth;
+            // Debounce the resize event to prevent lag while the address bar is hiding
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
                 resizeCanvas();
-            }
+                // Forzar redibujado
+                lastRenderedFrame = -1;
+            }, 100);
         });
 
         // Dibujar primer frame
