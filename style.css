@@ -5,7 +5,7 @@
     
     --bg-color: #000000;
     --text-color: #FAF8F5;
-    --accent-gold: #D4A853;
+    --accent-orange: #F26122; /* Naranja extraído de la 'U' del frasco */
     --accent-red: #C1440E;
 }
 
@@ -37,7 +37,7 @@ html, body {
     left: 0;
     width: 20px;
     height: 20px;
-    border: 1.5px solid var(--accent-gold);
+    border: 1.5px solid var(--accent-orange);
     border-radius: 50%;
     pointer-events: none;
     z-index: 99999;
@@ -86,7 +86,7 @@ html, body {
 
 .loader-text {
     font-family: var(--font-primary);
-    color: var(--accent-gold);
+    color: var(--accent-orange);
     font-size: 1.5rem;
     font-weight: 400;
     margin-bottom: 20px;
@@ -106,7 +106,7 @@ html, body {
     left: 0;
     height: 100%;
     width: 0%;
-    background-color: var(--accent-gold);
+    background-color: var(--accent-orange);
     transition: width 0.1s linear;
 }
 
@@ -170,7 +170,7 @@ body.loading {
     transform: translateX(-50%);
     width: 4px;
     height: 6px;
-    background-color: var(--accent-gold);
+    background-color: var(--accent-orange);
     border-radius: 2px;
     animation: scrollWheel 2s infinite;
 }
@@ -231,7 +231,7 @@ body.loading {
     font-size: 0.85rem;
     letter-spacing: 4px;
     text-transform: uppercase;
-    color: var(--accent-gold);
+    color: var(--accent-orange);
     margin-bottom: 10px;
 }
 
@@ -253,7 +253,7 @@ body.loading {
 
 /* CTA Button */
 .cta-button {
-    background-color: var(--accent-gold);
+    background-color: var(--accent-orange);
     color: #000000;
     font-family: var(--font-secondary);
     font-weight: 600;
@@ -325,7 +325,7 @@ body.loading {
 
 /* Custom UI Components */
 .highlight-text {
-    color: var(--accent-gold);
+    color: var(--accent-orange);
     font-weight: 600;
     font-size: 1.1rem;
     display: block;
@@ -357,7 +357,7 @@ body.loading {
 }
 
 .ingredient-list span:nth-child(2) {
-    color: var(--accent-gold);
+    color: var(--accent-orange);
     margin: 0 10px;
 }
 
@@ -384,11 +384,11 @@ body.loading {
 
 .tag-pill {
     padding: 8px 16px;
-    border: 1px solid var(--accent-gold);
+    border: 1px solid var(--accent-orange);
     border-radius: 20px;
     font-size: 0.85rem;
-    color: var(--accent-gold);
-    background-color: rgba(212, 168, 83, 0.1);
+    color: var(--accent-orange);
+    background-color: rgba(242, 97, 34, 0.1);
     text-shadow: none;
     cursor: none;
 }

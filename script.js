@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const stages = [
         {
             threshold: 0,
-            title: "Saz<span style='color: var(--accent-gold)'>u</span>mami",
+            title: "Saz<span style='color: var(--accent-orange)'>u</span>mami",
             subtitle: "SAZÓN DE MAR",
             htmlContent: "",
             showSeal: false,
@@ -94,7 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
         },
         {
             threshold: 0.14,
-            title: "El <span style='color: var(--accent-gold)'>Origen</span>",
+            title: "El <span style='color: var(--accent-orange)'>Origen</span>",
             subtitle: "",
             htmlContent: "El sabor puro del océano, capturado y molido artesanalmente para elevar tus platillos a nivel gourmet.",
             showSeal: false,
@@ -102,7 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
         },
         {
             threshold: 0.28,
-            title: "Nuestra <span style='color: var(--accent-gold)'>Receta</span>",
+            title: "Nuestra <span style='color: var(--accent-orange)'>Receta</span>",
             subtitle: "",
             htmlContent: `
                 <p style="margin-bottom: 8px;">El alma de nuestro sazón es 100% natural:</p>
@@ -114,7 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
         },
         {
             threshold: 0.42,
-            title: "Ingredientes y <span style='color: var(--accent-gold)'>Composición</span>",
+            title: "Ingredientes y <span style='color: var(--accent-orange)'>Composición</span>",
             subtitle: "",
             htmlContent: `
                 <ul class="ingredient-list">
@@ -134,7 +134,7 @@ document.addEventListener("DOMContentLoaded", () => {
         },
         {
             threshold: 0.56,
-            title: "Versatilidad <span style='color: var(--accent-gold)'>Absoluta</span>",
+            title: "Versatilidad <span style='color: var(--accent-orange)'>Absoluta</span>",
             subtitle: "",
             htmlContent: `
                 <div class="tag-pill-container">
@@ -151,7 +151,7 @@ document.addEventListener("DOMContentLoaded", () => {
         },
         {
             threshold: 0.70,
-            title: "Información <span style='color: var(--accent-gold)'>Nutrimental</span>",
+            title: "Información <span style='color: var(--accent-orange)'>Nutrimental</span>",
             subtitle: "",
             htmlContent: `
                 <table class="nutrition-table">
@@ -172,7 +172,7 @@ document.addEventListener("DOMContentLoaded", () => {
         },
         {
             threshold: 0.85,
-            title: "Saz<span style='color: var(--accent-gold)'>u</span>mami",
+            title: "Saz<span style='color: var(--accent-orange)'>u</span>mami",
             subtitle: "SAZÓN DE MAR",
             htmlContent: `
                 <p style="text-align: center; margin-bottom: 20px;">Consérvese en lugar fresco y seco.</p>
