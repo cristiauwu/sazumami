@@ -326,8 +326,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const iw = img.naturalWidth;
         const ih = img.naturalHeight;
 
-        // Matemáticas para object-fit: cover
-        const scale = Math.max(cw / iw, ch / ih);
+        // Matemáticas para object-fit: contain (evita recortes y estiramientos)
+        const scale = Math.min(cw / iw, ch / ih);
         const x = (cw / 2) - (iw / 2) * scale;
         const y = (ch / 2) - (ih / 2) * scale;
 
