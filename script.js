@@ -16,6 +16,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const ctaButton = document.getElementById("cta-button");
     const brandLogo = document.querySelector(".brand-logo");
 
+    // === Navegación por Flechas ===
+    const navArrows = document.getElementById("nav-arrows");
+    const navArrowUp = document.getElementById("nav-arrow-up");
+    const navArrowDown = document.getElementById("nav-arrow-down");
+    const stageDots = document.querySelectorAll(".stage-dot");
+
     // === Cursor Personalizado ===
     const customCursor = document.getElementById("custom-cursor");
     let cursorTargetX = window.innerWidth / 2;
@@ -248,6 +254,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Iniciar el bucle de animación para el Mouse Parallax
         requestAnimationFrame(animationLoop);
+
+        // === Setup Navegación por Flechas ===
+        if (navArrowUp) {
+            navArrowUp.addEventListener("click", (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                if (currentStage > 0) goToStage(currentStage - 1);
+            });
+        }
+        if (navArrowDown) {
+            navArrowDown.addEventListener("click", (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                if (currentStage < stages.length - 1) goToStage(currentStage + 1);
+            });
+        }
+        stageDots.forEach((dot) => {
+            dot.addEventListener("click", (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                const target = parseInt(dot.dataset.stage, 10);
+                if (target !== currentStage) goToStage(target);
+            });
+        });
     }
 
     // === Lógica de Mouse Parallax y Cursor ===
@@ -371,6 +401,35 @@ document.addEventListener("DOMContentLoaded", () => {
         // Actualizar UI si cambió la etapa
         if (newStage !== currentStage) {
             updateUI(newStage);
+        }
+
+        // Actualizar dots y flechas
+        updateNavState(newStage);
+    }
+
+    // === Saltar a una Etapa con Scroll Suave ===
+    function goToStage(targetIndex) {
+        if (targetIndex < 0 || targetIndex >= stages.length) return;
+        const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+        const targetScroll = stages[targetIndex].threshold * maxScroll;
+        window.scrollTo({
+            top: targetScroll,
+            behavior: 'smooth'
+        });
+    }
+
+    // === Actualizar Estado de Navegación (Dots + Flechas) ===
+    function updateNavState(activeIndex) {
+        // Toggle dots
+        stageDots.forEach((dot, i) => {
+            dot.classList.toggle("active", i === activeIndex);
+        });
+        // Mostrar/ocultar flechas
+        if (navArrowUp) navArrowUp.classList.toggle("disabled", activeIndex === 0);
+        if (navArrowDown) navArrowDown.classList.toggle("disabled", activeIndex === stages.length - 1);
+        // Mostrar nav después del primer stage
+        if (navArrows) {
+            navArrows.classList.toggle("visible", activeIndex > 0);
         }
     }
 
