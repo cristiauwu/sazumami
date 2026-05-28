@@ -228,15 +228,13 @@ document.addEventListener("DOMContentLoaded", () => {
         // Configurar Canvas
         resizeCanvas();
         
-        let resizeTimeout;
+        let lastWidth = window.innerWidth;
         window.addEventListener("resize", () => {
-            // Debounce the resize event to prevent lag while the address bar is hiding
-            clearTimeout(resizeTimeout);
-            resizeTimeout = setTimeout(() => {
+            // Solo redimensionar si el ancho de la pantalla cambia (evita el bug de la barra de direcciones móvil)
+            if (window.innerWidth !== lastWidth) {
+                lastWidth = window.innerWidth;
                 resizeCanvas();
-                // Forzar redibujado
-                lastRenderedFrame = -1;
-            }, 100);
+            }
         });
 
         // Dibujar primer frame
@@ -285,8 +283,8 @@ document.addEventListener("DOMContentLoaded", () => {
             ctaButton.style.transform = `translate(${ctaActualX}px, ${ctaActualY}px) scale(${ctaActualScale})`;
         }
 
-        // === Lerp de Frames (Scroll Suave pero Responsivo) ===
-        currentFrame += (targetFrame - currentFrame) * 0.4;
+        // === Lerp de Frames (Scroll Responsivo al dedo) ===
+        currentFrame += (targetFrame - currentFrame) * 0.25;
         const frameToRender = Math.round(currentFrame);
         if (frameToRender !== lastRenderedFrame) {
             lastRenderedFrame = frameToRender;
@@ -328,8 +326,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const iw = img.naturalWidth;
         const ih = img.naturalHeight;
 
-        // Matemáticas para object-fit: contain (evita recortes y estiramientos)
-        const scale = Math.min(cw / iw, ch / ih);
+        // Matemáticas para object-fit: cover
+        const scale = Math.max(cw / iw, ch / ih);
         const x = (cw / 2) - (iw / 2) * scale;
         const y = (ch / 2) - (ih / 2) * scale;
 
