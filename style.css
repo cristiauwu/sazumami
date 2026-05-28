@@ -19,10 +19,13 @@ html, body {
     background-color: var(--bg-color);
     color: var(--text-color);
     font-family: var(--font-secondary);
-    /* Set a more responsive height */
-    height: 300vh;
+    /* Allow vertical scrolling but prevent overscroll bounce */
+    height: 100%;
+    min-height: 100vh;
     overflow-x: hidden;
-    cursor: none; /* Ocultar cursor nativo */
+    overflow-y: auto;
+    overscroll-behavior: none;
+    cursor: none; /* Hide native cursor */
 }
 
 /* Custom Cursor */
@@ -140,15 +143,17 @@ body.loading {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     transition: opacity 0.5s ease;
 }
 
 #scroll-indicator span {
     font-size: 0.75rem;
     text-transform: uppercase;
-    letter-spacing: 2px;
-    color: rgba(250, 248, 245, 0.6);
+    letter-spacing: 3px;
+    color: rgba(250, 248, 245, 0.65);
+    font-family: var(--font-secondary);
+    font-weight: 500;
 }
 
 .mouse-icon {
