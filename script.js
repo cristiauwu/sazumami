@@ -411,7 +411,11 @@ document.addEventListener("DOMContentLoaded", () => {
     function goToStage(targetIndex) {
         if (targetIndex < 0 || targetIndex >= stages.length) return;
         const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-        const targetScroll = stages[targetIndex].threshold * maxScroll;
+        // Calcular el punto medio del rango del stage para aterrizar exactamente
+        const stageStart = stages[targetIndex].threshold;
+        const stageEnd = targetIndex < stages.length - 1 ? stages[targetIndex + 1].threshold : 1;
+        const midpoint = stageStart + (stageEnd - stageStart) * 0.1; // 10% dentro del rango
+        const targetScroll = Math.round(midpoint * maxScroll);
         window.scrollTo({
             top: targetScroll,
             behavior: 'smooth'
@@ -424,13 +428,9 @@ document.addEventListener("DOMContentLoaded", () => {
         stageDots.forEach((dot, i) => {
             dot.classList.toggle("active", i === activeIndex);
         });
-        // Mostrar/ocultar flechas
+        // Mostrar/ocultar flechas según posición
         if (navArrowUp) navArrowUp.classList.toggle("disabled", activeIndex === 0);
         if (navArrowDown) navArrowDown.classList.toggle("disabled", activeIndex === stages.length - 1);
-        // Mostrar nav después del primer stage
-        if (navArrows) {
-            navArrows.classList.toggle("visible", activeIndex > 0);
-        }
     }
 
     function updateUI(stageIndex) {
